@@ -1,0 +1,77 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="question"
+            type="com.baptistecarlier.android.demo.ut.Question" />
+    </data>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/constraintLayout"
+        tools:context=".MainActivity">
+
+        <Button
+            android:id="@+id/confirmButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="Confirm"
+            android:onClick="bottomButtonClick"
+            android:visibility="@{question.selectedAnswer != null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/confirmButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question">
+
+            <RadioButton
+                android:id="@+id/badAnswer"
+                android:text="@{question.badAnswer.value}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="selectBadAnswer"
+                tools:text="Answer One"/>
+
+            <RadioButton
+                android:id="@+id/correctAnswer"
+                android:text="@{question.correctAnswer.value}"
+                android:onClick="selectCorrectAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Answer Two, maybe the corect one. I guess it is"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="This is the question"
+            android:text="@{question.label}"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
